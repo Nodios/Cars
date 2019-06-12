@@ -1,4 +1,5 @@
 import { RouterStore as MobxStateRouter, RouterState, HistoryAdapter } from 'mobx-state-router';
+import {decorate, action} from 'mobx';
 import {createBrowserHistory} from 'history';
 import { routes } from './routes';
 
@@ -14,8 +15,6 @@ class RouterStore {
 
         this.historyAdapter = new HistoryAdapter(this.routerStore, history);
         this.historyAdapter.observeRouterStateChanges();
-
-        this.goTo = this.goTo.bind(this);
     }
 
     goTo(route, params = {}, queryParams = {}) {
@@ -23,4 +22,6 @@ class RouterStore {
     }
 }
 
-export default RouterStore;
+export default decorate(RouterStore, {
+    goTo: action.bound
+});

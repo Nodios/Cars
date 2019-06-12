@@ -8,6 +8,14 @@ export const routes = [
         pattern: '/vehicle-models'
     },
     {
+        name: 'vehicleModelCreate',
+        pattern: '/vehicle-models/create'
+    },
+    {
+        name: 'vehicleModelEdit',
+        pattern: '/vehicle-models/:id'
+    },
+    {
         name: 'vehicleMakes',
         pattern: '/vehicle-makes'
     },

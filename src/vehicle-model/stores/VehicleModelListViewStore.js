@@ -49,8 +49,16 @@ class VehicleModelListViewStore {
         })
     }
 
+    onCreate(event) {
+        event.preventDefault();
+
+        this.rootStore.goTo('vehicleModelCreate');
+    }
+
     onEdit({ event, datum }) {
         event.preventDefault();
+
+        this.rootStore.goTo('vehicleModelEdit', {id: datum.id});
     }
 
     onDelete({ event, datum }) {
@@ -60,6 +68,7 @@ class VehicleModelListViewStore {
 }
 
 export default decorate(VehicleModelListViewStore, {
+    onCreate: action.bound,
     onEdit: action.bound,
     onDelete: action.bound
 });

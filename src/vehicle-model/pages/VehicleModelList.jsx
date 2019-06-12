@@ -12,10 +12,11 @@ class VehicleModelList extends Component {
     }
 
     render() {
-        const { tableStore } = this.props.viewStore;
+        const { tableStore, onCreate } = this.props.viewStore;
 
         return (
             <MainLayout>
+                <button type="button" onClick={onCreate}>Create new</button>
                 <TableFilter tableStore={tableStore}>
 
                 </TableFilter>
