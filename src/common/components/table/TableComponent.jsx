@@ -19,7 +19,7 @@ class TableComponent extends React.Component {
 
     renderHeader() {
         const { columns, onSortChange, sortDirection, sortColumn, config: {actions} } = this.props.tableStore;
-        const colHeaders = columns.map(i => ({ header: i.header, key: i.key })).filter(i => i);
+        const colHeaders = columns.map(i => ({ header: i.header, key: i.key, orderKey: i.orderKey })).filter(i => i);
 
         function renderSortDirectionArrow(sortDir) {
             let arrow;
@@ -41,9 +41,9 @@ class TableComponent extends React.Component {
         return (
             <tr>
                 {colHeaders.map((ch, i) =>
-                    <th key={i} onClick={e => onSortChange({ event: e, column: ch.key, sortDir: sortDirection })}>
+                    <th key={i} onClick={e => onSortChange({ event: e, column: ch.orderKey, sortDir: sortDirection })}>
                         {ch.header}
-                        {sortColumn === ch.key && renderSortDirectionArrow(sortDirection)}
+                        {sortColumn === ch.orderKey && renderSortDirectionArrow(sortDirection)}
                     </th>
                 )}
                 {(this.props.actionComponent || actions) && <th>Actions</th>}

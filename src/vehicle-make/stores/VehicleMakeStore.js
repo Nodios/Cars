@@ -6,7 +6,7 @@ const data = [
     { id: 1, name: 'Ford', abrv: 'ford' },
     { id: 2, name: 'Škoda', abrv: 'skoda' },
     { id: 3, name: 'VolksWagen', abrv: 'vw' },
-    { id: 4, name: 'Auid', abrv: 'audi' },
+    { id: 4, name: 'Audi', abrv: 'audi' },
 ];
 
 

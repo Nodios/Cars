@@ -23,7 +23,8 @@ class VehicleModelListViewStore {
                 },
                 {
                     header: 'Make',
-                    key: 'make.name'
+                    key: 'make.name',
+                    orderKey: 'makeId'
                 }
             ],
             actions: {

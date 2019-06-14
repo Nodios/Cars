@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { decorate, observable, action, computed } from 'mobx';
-
+import {mapColumns} from './utils';
 
 class TableStore {
     config = {
@@ -29,7 +29,7 @@ class TableStore {
 
         const { columns, ...cfg } = config;
 
-        this.columns = columns;
+        this.columns = mapColumns(columns);
         _.merge(this.config, cfg);
 
         this.defaultFetch({ orderBy: this.sortColumn, orderDirection: this.sortDirection });
