@@ -1,7 +1,10 @@
 import React from 'react';
+import {MainLayout} from '../../layouts';
 import { defaultTemplate } from '../../common/hoc';
 import { useStore } from '../../common/utils';
 import { VehicleModelEditViewStore } from '../stores';
+
+import {VehicleModelFormBackNavigation} from '../components';
 
 class VehicleModelEdit extends React.Component {
     constructor(props) {
@@ -11,16 +14,16 @@ class VehicleModelEdit extends React.Component {
     renderSubmitButton(isEdit) {
         let buttonLabel = 'Create';
         if (isEdit) {
-            buttonLabel = 'Edit'
+            buttonLabel = 'Save'
         }
 
         return <button type="submit">{buttonLabel}</button>
     }
 
     render() {
-        const { form, vehicleMakes, isEdit } = this.props.editViewStore;
+        const { form, vehicleMakes, isEdit, rootStore: {goTo} } = this.props.editViewStore;
         return (
-            <div>
+            <MainLayout navigationRenderer={(props) => <VehicleModelFormBackNavigation {...props} />}>
                 <form onSubmit={form.onSubmit}>
                     <label htmlFor={form.$('name')}>
                         {form.$('name').label}
@@ -37,8 +40,9 @@ class VehicleModelEdit extends React.Component {
                     </select>
 
                     {this.renderSubmitButton(isEdit)}
+                    <button type="button" onClick={e => goTo('vehicleModels')}>Cancel</button>
                 </form>
-            </div>
+            </MainLayout>
         );
     }
 }

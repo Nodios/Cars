@@ -2,6 +2,8 @@ import { decorate, observable, action } from 'mobx';
 import _ from 'lodash';
 
 class BaseDataStore {
+    data = [];
+
     constructor(moduleStore, data) {
         if (!data) {
             throw new Error("You need to pass data into BaseDataStore");
@@ -47,9 +49,10 @@ class BaseDataStore {
     }
 
     create(model) {
-        const lastId = _.maxBy(this.data, item => item.id);
+        const lastId = this.data.length > 0 ? _.maxBy(this.data, item => item.id).id : 0;
 
         model.id = lastId + 1;
+        model.abrv = model.name.toLowerCase().replace(" ", "-").trim();
 
         this.data.push(model);
     }
@@ -67,10 +70,10 @@ class BaseDataStore {
     }
 
     delete(id) {
-        var elemIndex = this.data.findIndex(e => e.id === id);
+        const elem = this.data.find(e => e.id === id);
 
-        if (elemIndex > -1) {
-            this.data.splice(elemIndex, 1);
+        if (elem) {
+            this.data.remove(elem);
         }
     }
 }
