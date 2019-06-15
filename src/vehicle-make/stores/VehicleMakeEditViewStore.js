@@ -6,6 +6,7 @@ class VehicleMakeEditViewStore {
     constructor(rootStore) {
         this.rootStore = rootStore;
         this.vehicleMakeStore = rootStore.vehicleMakeModuleStore.vehicleMakeStore;
+        this.id = +rootStore.routerStore.routerStore.routerState.params.id;
 
         if (isNaN(this.id)) {
             rootStore.goTo('vehicleMakeCreate');
