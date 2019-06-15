@@ -20,6 +20,14 @@ export const routes = [
         pattern: '/vehicle-makes'
     },
     {
+        name: 'vehicleMakeCreate',
+        pattern: '/vehicle-makes/create'
+    },
+    {
+        name: 'vehicleMakeEdit',
+        pattern: '/vehicle-makes/:id'
+    },
+    {
         name: 'notFound',
         pattern: '/not-found'
     }

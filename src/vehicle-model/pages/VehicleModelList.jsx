@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { defaultTemplate } from '../../common/hoc'
 import { useStore } from '../../common/utils'
 
-import {MainLayout} from '../../layouts';
+import { MainLayout } from '../../layouts';
 import { VehicleModelListViewStore } from '../stores';
-import {Table, TableFilter} from '../../common/components';
+import { Table, TableFilter } from '../../common/components';
+
+import { VehicleModelListNavigation } from '../components';
 
 class VehicleModelList extends Component {
     constructor(props) {
@@ -15,8 +17,7 @@ class VehicleModelList extends Component {
         const { tableStore, onCreate } = this.props.viewStore;
 
         return (
-            <MainLayout>
-                <button type="button" onClick={onCreate}>Create new</button>
+            <MainLayout navigationRenderer={(props) => <VehicleModelListNavigation {...props} />}>
                 <TableFilter tableStore={tableStore}>
 
                 </TableFilter>

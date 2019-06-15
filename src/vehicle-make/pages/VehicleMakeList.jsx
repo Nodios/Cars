@@ -5,6 +5,7 @@ import { useStore } from '../../common/utils'
 import { MainLayout } from '../../layouts';
 import { VehicleMakeListViewStore } from '../stores';
 import { Table, TableFilter } from '../../common/components';
+import { VehicleMakeListNavigation } from '../components';
 
 class VehicleMakeList extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class VehicleMakeList extends Component {
         const { tableStore } = this.props.viewStore;
 
         return (
-            <MainLayout>
+            <MainLayout navigationRenderer={(props) => <VehicleMakeListNavigation {...props} />}>
                 <TableFilter tableStore={tableStore}>
 
                 </TableFilter>

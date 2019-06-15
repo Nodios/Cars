@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VehicleModelFormBackNavigation = function ({ goTo }) {
+const VehicleModelFormNavigation = function ({ goTo }) {
     return (
         <div>
             <button onClick={e => goTo('vehicleModels')}>Back</button>
@@ -8,4 +8,4 @@ const VehicleModelFormBackNavigation = function ({ goTo }) {
     )
 }
 
-export default VehicleModelFormBackNavigation;
+export default VehicleModelFormNavigation;
