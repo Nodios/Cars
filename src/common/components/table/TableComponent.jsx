@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+
 import { defaultTemplate } from '../../hoc';
+import { TableStore } from '../../stores/components';
 
 import TablePager from './TablePagerComponent';
-import { TableStore } from '../../stores/components';
+import TableEmptyState from './TableEmptyState';
 
 const SORT_ARROWS = {
     NEUTRAL: '',
@@ -72,6 +74,10 @@ class TableComponent extends React.Component {
     renderBody() {
         const { columns, data } = this.props.tableStore;
         const colKeys = columns.map(i => i.key).filter(i => i);
+
+        if(data.length === 0) {
+            return <TableEmptyState />
+        }
 
         return data.map((datum, datumIdx) =>
             <tr>
