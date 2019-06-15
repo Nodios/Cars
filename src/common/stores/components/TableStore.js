@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import { decorate, observable, action, computed } from 'mobx';
-import {mapColumns} from './utils';
+import { mapColumns } from './utils';
 
 class TableStore {
     config = {
-        // onSortChange: (sortChangeObj) => { },
         actions: null,
         fetchFn: (filter) => { }
     };
@@ -32,10 +31,10 @@ class TableStore {
         this.columns = mapColumns(columns);
         _.merge(this.config, cfg);
 
-        this.defaultFetch({ orderBy: this.sortColumn, orderDirection: this.sortDirection });
+        this.onFilter({ orderBy: this.sortColumn, orderDirection: this.sortDirection });
     }
 
-    defaultFetch(filter = {}) {
+    onFilter(filter = {}) {
         const response = this.config.fetchFn(filter);
 
         this.totalItems = response.totalRecords;
@@ -60,7 +59,7 @@ class TableStore {
     }
 
     onSearchChange(searchObj) {
-        const {event, value} = searchObj;
+        const { event, value } = searchObj;
         event.preventDefault();
 
         this.searchString = value;
@@ -75,7 +74,7 @@ class TableStore {
     onApplyFilter(event) {
         event.preventDefault();
 
-        this.defaultFetch({
+        this.onFilter({
             searchString: this.searchString,
             orderBy: this.sortColumn,
             orderDirection: this.sortDirection,
@@ -93,7 +92,7 @@ class TableStore {
     }
 
     onPageChange(pageChangeObj) {
-        const {event, page} = pageChangeObj;
+        const { event, page } = pageChangeObj;
 
         this.page = page;
 
@@ -123,7 +122,7 @@ export default decorate(TableStore, {
     sortDirection: observable,
     page: observable,
     rpp: observable,
-    defaultFetch: action.bound,
+    onFilter: action.bound,
     onSortChange: action.bound,
     onSearchChange: action.bound,
     onFilterChange: action.bound,

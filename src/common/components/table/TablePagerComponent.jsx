@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { defaultTemplate } from '../../hoc';
 
 class TablePagerComponent extends Component {
     constructor(props) {
         super(props);
-
-        this.totalPages = Math.ceil(props.totalItems / props.rpp);
     }
 
     onPageChange(pageChangeObj) {
         const { event, page } = pageChangeObj;
         event.preventDefault();
 
-        this.props.onChange({event, page});
+        this.props.onChange({ event, page });
     }
 
     renderPreviousPage() {
@@ -27,10 +26,11 @@ class TablePagerComponent extends Component {
     }
 
     renderNextPage() {
-        const page = this.props.page;
+        const { page, rpp, totalItems } = this.props;
         const nextPage = page + 1;
 
-        if (page === this.totalPages) return null;
+        const totalPages = Math.ceil(totalItems / rpp);
+        if (page === totalPages) return null;
 
         return <li key="next-page" onClick={e => this.onPageChange({ event: e, page: nextPage })}>
             <button>►►</button>
@@ -38,11 +38,13 @@ class TablePagerComponent extends Component {
     }
 
     buildPages() {
+        const { rpp, totalItems } = this.props;
         let pages = [];
 
         pages.push(this.renderPreviousPage());
 
-        for (let i = 1; i <= this.totalPages; i++) {
+        const totalPages = Math.ceil(totalItems / rpp);
+        for (let i = 1; i <= totalPages; i++) {
             pages.push(
                 <li key={i} className={(this.props.page === i ? 'active' : '')} onClick={e => this.onPageChange({ event: e, page: i })}>{i}</li>
             );
@@ -78,4 +80,4 @@ TablePagerComponent.defaultProps = {
     onChange: () => { }
 };
 
-export default TablePagerComponent;
+export default defaultTemplate(TablePagerComponent);

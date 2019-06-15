@@ -73,7 +73,7 @@ class BaseDataStore {
         const elem = this.data.find(e => e.id === id);
 
         if (elem) {
-            this.data.remove(elem);
+            const removeResult = this.data.remove(elem); // will be true if item is removed
         }
     }
 }

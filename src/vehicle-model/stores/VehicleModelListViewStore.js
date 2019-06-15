@@ -65,6 +65,7 @@ class VehicleModelListViewStore {
     onDelete({ event, datum }) {
         event.preventDefault();
         this.vehicleModelStore.delete(datum.id);
+        this.tableStore.onFilter();
     }
 }
 
