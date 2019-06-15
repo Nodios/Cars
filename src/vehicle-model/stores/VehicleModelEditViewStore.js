@@ -1,5 +1,5 @@
 import { VehicleModelForm } from '../forms';
-import {decorate, computed, action, observable} from 'mobx';
+import { decorate, computed, action, observable } from 'mobx';
 import _ from 'lodash';
 
 class VehicleModelEditViewStore {
@@ -15,14 +15,14 @@ class VehicleModelEditViewStore {
         this.id = +rootStore.routerStore.routerStore.routerState.params.id;
 
         // invalid id - navigate to create
-        if(isNaN(this.id)) {
+        if (isNaN(this.id)) {
             rootStore.goTo('vehicleModelCreate')
         }
 
         let vehicleModel = this.isEdit ? this.vehicleModelStore.get(this.id) : null
 
         // valid id, but not existing data - navigate to create
-        if(this.isEdit && !vehicleModel) {
+        if (this.isEdit && !vehicleModel) {
             rootStore.goTo('vehicleModelCreate')
         }
 
@@ -38,18 +38,26 @@ class VehicleModelEditViewStore {
 
     onSuccess(form) {
         const formModel = form.values();
-        if(!this.isEdit) {
+        if (!this.isEdit) {
             this.vehicleModelStore.create(formModel);
+            this.rootStore.notificationService.success("Successfully created new model - " + formModel.name);
         }
         else {
             this.vehicleModelStore.update(formModel);
+            this.rootStore.notificationService.success("Successfully updated model - " + formModel.name);
         }
 
         this.rootStore.goTo('vehicleModels')
     }
 
     onError(form) {
-
+        const formModel = form.values();
+        if (this.isEdit) {
+            this.rootStore.notificationService.error("Could not update model - " + formModel.name);
+        }
+        else {
+            this.rootStore.notificationService.error("Could not create new model.");
+        }
     }
 }
 

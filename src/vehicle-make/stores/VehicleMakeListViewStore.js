@@ -36,11 +36,20 @@ class VehicleMakeListViewStore {
 
     onEdit({ event, datum }) {
         event.preventDefault();
+
+        this.rootStore.goTo('vehicleMakeEdit', {id: datum.id});
     }
 
     onDelete({ event, datum }) {
         event.preventDefault();
-        this.vehicleMakeStore.delete(datum.id);
+        const result = this.vehicleMakeStore.delete(datum.id);
+        if (result) {
+            this.rootStore.notificationService.success("Successfully deleted " + datum.name);
+        } else {
+            this.rootStore.notificationService.error("Could not delete " + datum.name);
+        }
+
+        this.tableStore.onFilter();
     }
 }
 

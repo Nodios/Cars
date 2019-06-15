@@ -64,7 +64,13 @@ class VehicleModelListViewStore {
 
     onDelete({ event, datum }) {
         event.preventDefault();
-        this.vehicleModelStore.delete(datum.id);
+        const result = this.vehicleModelStore.delete(datum.id);
+        if (result) {
+            this.rootStore.notificationService.success("Successfully deleted " + datum.name);
+        } else {
+            this.rootStore.notificationService.error("Could not delete " + datum.name);
+        }
+
         this.tableStore.onFilter();
     }
 }

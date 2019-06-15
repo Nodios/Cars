@@ -1,5 +1,5 @@
-import {VehicleMakeForm} from '../forms';
-import {decorate, computed, action} from 'mobx';
+import { VehicleMakeForm } from '../forms';
+import { decorate, computed, action } from 'mobx';
 import _ from 'lodash';
 
 class VehicleMakeEditViewStore {
@@ -7,13 +7,13 @@ class VehicleMakeEditViewStore {
         this.rootStore = rootStore;
         this.vehicleMakeStore = rootStore.vehicleMakeModuleStore.vehicleMakeStore;
 
-        if(isNaN(this.id)) {
+        if (isNaN(this.id)) {
             rootStore.goTo('vehicleMakeCreate');
         }
 
         let vehicleMake = this.isEdit ? this.vehicleMakeStore.get(this.id) : null;
 
-        if(this.isEdit && !vehicleMake) {
+        if (this.isEdit && !vehicleMake) {
             rootStore.goTo('vehicleMakeCreate');
         }
 
@@ -29,18 +29,26 @@ class VehicleMakeEditViewStore {
 
     onSuccess(form) {
         const formModel = form.values();
-        if(!this.isEdit) {
+        if (!this.isEdit) {
             this.vehicleMakeStore.create(formModel);
+            this.rootStore.notificationService.success("Successfully created new make - " + formModel.name);
         }
         else {
             this.vehicleMakeStore.update(formModel);
+            this.rootStore.notificationService.success("Successfully updated make - " + formModel.name);
         }
 
         this.rootStore.goTo('vehicleMakes')
     }
 
     onError(form) {
-
+        const formModel = form.values();
+        if (this.isEdit) {
+            this.rootStore.notificationService.error("Could not update make - " + formModel.name);
+        }
+        else {
+            this.rootStore.notificationService.error("Could not create new make.");
+        }
     }
 }
 
