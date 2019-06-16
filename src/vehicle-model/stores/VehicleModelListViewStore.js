@@ -47,7 +47,7 @@ class VehicleModelListViewStore {
                     items: mappedItems
                 };
             }
-        })
+        });
     }
 
     onCreate(event) {

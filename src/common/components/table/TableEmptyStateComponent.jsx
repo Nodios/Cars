@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TableEmptyState extends React.Component {
+class TableEmptyStateComponent extends React.Component {
     render() {
         return (
             <div>
@@ -10,4 +10,4 @@ class TableEmptyState extends React.Component {
     }
 }
 
-export default TableEmptyState;
+export default TableEmptyStateComponent;

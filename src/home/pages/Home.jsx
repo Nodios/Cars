@@ -1,18 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {inject} from 'mobx-react';
 
 import logo from '../../logo.svg';
+import style from '../styles/Home.module.css';
 
 class Home extends Component {
     render() {
-        const { goTo } = this.props;
+        const {goTo} = this.props;
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                <a className="App-link" onClick={e => goTo('home')}>Home</a>
-                <a className="App-link" onClick={e => goTo('vehicleModels')}>Models</a>
-                <a className="App-link" onClick={e => goTo('vehicleMakes')}>Make</a>
+            <div className={style.app}>
+                <header className={style.header}>
+                    <img src={logo} className={style.logo} alt="logo"/>
+                    <div className={style.linkWrapper}>
+                        <button className={style.button} onClick={e => goTo('home')}>Home</button>
+                        <button className={style.button} onClick={e => goTo('vehicleModels')}>Models</button>
+                        <button className={style.button} onClick={e => goTo('vehicleMakes')}>Make</button>
+                    </div>
                 </header>
             </div>
         )

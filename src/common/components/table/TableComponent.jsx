@@ -6,7 +6,7 @@ import { defaultTemplate } from '../../hoc';
 import { TableStore } from '../../stores/components';
 
 import TablePager from './TablePagerComponent';
-import TableEmptyState from './TableEmptyState';
+import TableEmptyState from './TableEmptyStateComponent';
 
 const SORT_ARROWS = {
     NEUTRAL: '',
@@ -80,7 +80,7 @@ class TableComponent extends React.Component {
         }
 
         return data.map((datum, datumIdx) =>
-            <tr>
+            <tr key={datumIdx}>
                 {colKeys.map((ck, ckIdx) =>
                     <td key={'d' + datumIdx + 'c' + ckIdx}>{_.get(datum, ck)}</td>
                 )}

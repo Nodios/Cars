@@ -5,7 +5,6 @@ import { Provider } from 'mobx-react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import './index.css';
 import App from './App';
 
 import { RootStore } from './common/stores';
