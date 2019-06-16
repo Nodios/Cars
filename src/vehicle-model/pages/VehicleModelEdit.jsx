@@ -2,6 +2,7 @@ import React from 'react';
 import { MainLayout } from '../../layouts';
 import { defaultTemplate } from '../../common/hoc';
 import { useStore } from '../../common/utils';
+import { Input, Dropdown } from '../../common/components';
 import { VehicleModelEditViewStore } from '../stores';
 
 import { VehicleModelFormNavigation } from '../components';
@@ -12,7 +13,7 @@ class VehicleModelEdit extends React.Component {
     }
 
     renderSubmitButton() {
-        const {isEdit} = this.props.editViewStore;
+        const { isEdit } = this.props.editViewStore;
         let buttonLabel = 'Create';
         if (isEdit) {
             buttonLabel = 'Save'
@@ -26,19 +27,9 @@ class VehicleModelEdit extends React.Component {
         return (
             <MainLayout navigationRenderer={(props) => <VehicleModelFormNavigation {...props} />}>
                 <form onSubmit={form.onSubmit}>
-                    <label htmlFor={form.$('name')}>
-                        {form.$('name').label}
-                    </label>
-                    <input {...form.$('name').bind()} />
+                    <Input field={form.$('name')} />
 
-                    <label htmlFor={form.$('makeId')}>
-                        {form.$('makeId').label}
-                    </label>
-                    <select {...form.$('makeId').bind()}>
-                        {vehicleMakes.map(vm =>
-                            <option value={vm.id}>{vm.name}</option>
-                        )}
-                    </select>
+                    <Dropdown field={form.$('makeId')} options={vehicleMakes} />
 
                     {this.renderSubmitButton()}
                     <button type="button" onClick={e => goTo('vehicleModels')}>Cancel</button>

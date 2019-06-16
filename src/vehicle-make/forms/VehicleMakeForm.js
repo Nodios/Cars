@@ -8,9 +8,13 @@ const placeholders = {
     name: 'Enter name'
 };
 
+const rules = {
+    name: 'required'
+}
+
 class VehicleMakeForm extends BaseForm {
     constructor(values, hooks) {
-        super({fields, labels, placeholders, values}, {hooks});
+        super({fields, labels, placeholders, rules, values}, {hooks});
     }
 }
 

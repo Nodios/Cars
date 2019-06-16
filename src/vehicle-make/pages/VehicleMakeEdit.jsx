@@ -2,6 +2,7 @@ import React from 'react';
 import { MainLayout } from '../../layouts';
 import { defaultTemplate } from '../../common/hoc';
 import { useStore } from '../../common/utils';
+import { Input } from '../../common/components';
 import { VehicleMakeEditViewStore } from '../stores';
 
 import {VehicleMakeFormNavigation} from '../components';
@@ -22,10 +23,7 @@ class VehicleMakeEdit extends React.Component {
         return (
             <MainLayout navigationRenderer={(props) => <VehicleMakeFormNavigation {...props} />}>
                 <form onSubmit={form.onSubmit}>
-                    <label htmlFor={form.$('name')}>
-                        {form.$('name').label}
-                    </label>
-                    <input {...form.$('name').bind()} />
+                    <Input field={form.$('name')} />
 
                     {this.renderSubmitButton()}
                     <button type="button" onClick={e => goTo('vehicleModels')}>Cancel</button>
