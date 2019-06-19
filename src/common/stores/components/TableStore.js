@@ -5,6 +5,7 @@ import { mapColumns } from './utils';
 class TableStore {
     config = {
         actions: null,
+        pager: null,
         fetchFn: (filter) => { }
     };
 
@@ -18,7 +19,7 @@ class TableStore {
     sortColumn = 'id';
     sortDirection = 'asc';
     page = 1;
-    rpp = 10;
+    _rpp = 10;
     totalItems = 0;
 
     constructor(config = {}) {
@@ -32,6 +33,18 @@ class TableStore {
         _.merge(this.config, cfg);
 
         this.onFilter({ orderBy: this.sortColumn, orderDirection: this.sortDirection });
+    }
+
+    get rpp() {
+        if(this.config.pager != null && this.config.pager.rppOptions) {
+            if(!this.config.pager.rppOptions.includes(this._rpp)) {
+                return this.config.pager.rppOptions[0];
+            }
+            return this._rpp;
+        }
+        else {
+            return this._rpp;
+        }
     }
 
     onFilter(filter = {}) {
@@ -99,6 +112,14 @@ class TableStore {
         this.onApplyFilter(event);
     }
 
+    onRppChange(rppChangeObj) {
+        const {event, rpp} = rppChangeObj;
+
+        this._rpp = +rpp;
+
+        this.onApplyFilter(event);
+    }
+
     calculateSortDirection(sortDirection) {
         // you can expand this to three state sort order
         if (sortDirection === 'asc') {
@@ -121,7 +142,8 @@ export default decorate(TableStore, {
     sortColumn: observable,
     sortDirection: observable,
     page: observable,
-    rpp: observable,
+    _rpp: observable,
+    rpp: computed,
     onFilter: action.bound,
     onSortChange: action.bound,
     onSearchChange: action.bound,
@@ -129,4 +151,5 @@ export default decorate(TableStore, {
     onApplyFilter: action.bound,
     onClearFilter: action.bound,
     onPageChange: action.bound,
+    onRppChange: action.bound
 });

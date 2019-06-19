@@ -20,7 +20,7 @@ class TableComponent extends React.Component {
     }
 
     renderHeader() {
-        const { columns, onSortChange, sortDirection, sortColumn, config: {actions} } = this.props.tableStore;
+        const { columns, onSortChange, sortDirection, sortColumn, config: { actions } } = this.props.tableStore;
         const colHeaders = columns.map(i => ({ header: i.header, key: i.key, orderKey: i.orderKey })).filter(i => i);
 
         function renderSortDirectionArrow(sortDir) {
@@ -54,19 +54,19 @@ class TableComponent extends React.Component {
     }
 
     renderActionsComponent(datum) {
-        const {actionComponent, tableStore: {config: {actions}}} = this.props;
+        const { actionComponent, tableStore: { config: { actions } } } = this.props;
 
-        if(actionComponent) {
+        if (actionComponent) {
             return <td>{React.cloneElement(actionComponent, datum)}</td>
         }
 
-        if(!actions) return null;
-        if(!actions.onEdit && !actions.onDelete) return null;
+        if (!actions) return null;
+        if (!actions.onEdit && !actions.onDelete) return null;
 
         return (
             <td>
-                {actions.onEdit && <button type="button" onClick={e => actions.onEdit({event: e, datum: datum})} title="Edit">✎</button>}
-                {actions.onDelete && <button type="button" onClick={e => actions.onDelete({event: e, datum: datum})} title="Delete">✖</button>}
+                {actions.onEdit && <button type="button" onClick={e => actions.onEdit({ event: e, datum: datum })} title="Edit">✎</button>}
+                {actions.onDelete && <button type="button" onClick={e => actions.onDelete({ event: e, datum: datum })} title="Delete">✖</button>}
             </td>
         )
     }
@@ -75,7 +75,7 @@ class TableComponent extends React.Component {
         const { columns, data } = this.props.tableStore;
         const colKeys = columns.map(i => i.key).filter(i => i);
 
-        if(data.length === 0) {
+        if (data.length === 0) {
             return <TableEmptyState />
         }
 
@@ -90,12 +90,20 @@ class TableComponent extends React.Component {
     }
 
     renderPager() {
-        const {paging, tableStore} = this.props;
+        const { paging, tableStore } = this.props;
 
         // paging disabled
-        if(!paging) return null;
+        if (!paging) return null;
 
-        return <TablePager page={tableStore.page} rpp={tableStore.rpp} totalItems={tableStore.totalItems} onChange={tableStore.onPageChange} />;
+        const config = tableStore.config.pager || {};
+
+        return <TablePager
+            page={tableStore.page}
+            rpp={tableStore.rpp}
+            totalItems={tableStore.totalItems}
+            onChange={tableStore.onPageChange}
+            rppOptions={config.rppOptions}
+            onRppChange={tableStore.onRppChange} />;
     }
 
     render() {
