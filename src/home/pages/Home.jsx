@@ -12,9 +12,9 @@ class Home extends Component {
                 <header className={style.header}>
                     <img src={logo} className={style.logo} alt="logo"/>
                     <div className={style.linkWrapper}>
-                        <button className={style.button} onClick={e => goTo('home')}>Home</button>
-                        <button className={style.button} onClick={e => goTo('vehicleModels')}>Models</button>
-                        <button className={style.button} onClick={e => goTo('vehicleMakes')}>Make</button>
+                        <button className={style.link} onClick={e => goTo('home')}>Home</button>
+                        <button className={style.link} onClick={e => goTo('vehicleModels')}>Models</button>
+                        <button className={style.link} onClick={e => goTo('vehicleMakes')}>Make</button>
                     </div>
                 </header>
             </div>

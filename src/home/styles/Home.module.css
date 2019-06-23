@@ -24,17 +24,10 @@
 }
 
 .link {
-    composes: mainFont from '../../styles/App.module.css';
+    composes: mainFont from global;
+    composes: button from global;
     font-size: 40px;
     color: #61dafb;
-    cursor: pointer;
-}
-
-.button {
-    composes: link;
-    border: none;
-    text-decoration: none;
-    display: inline-block;
 }
 
 @keyframes App-logo-spin {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './styles/App.module.css';
-// import './App.css';
 
 import {RouterShell} from './common/router';
 
@@ -22,11 +21,7 @@ const viewMap = {
 
 class App extends Component {
   render() {
-    return (
-      <div>
-        <RouterShell viewMap={viewMap} />
-      </div>
-    );
+    return <RouterShell viewMap={viewMap} />;
   }
 }
 

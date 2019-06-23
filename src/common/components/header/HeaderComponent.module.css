@@ -1,0 +1,7 @@
+.header {
+
+}
+
+.link {
+    composes: button from global;
+}

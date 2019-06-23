@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import App from './App';
+import styles from './styles/Main.module.css';
 
 import { RootStore } from './common/stores';
 

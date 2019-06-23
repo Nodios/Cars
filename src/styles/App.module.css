@@ -1,17 +1,21 @@
-body {
-    margin: 0;
-    padding: 0;
-}
 
-.mainFont {
+:global .mainFont {
     font-family: Roboto, sans-serif;
     font-size: 14px;
 }
 
-.primaryColor {
+:global .primaryColor {
 
 }
 
-.secondaryColor {
+:global .secondaryColor {
 
+}
+
+:global .button {
+    border: none;
+    background: none;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
 }
