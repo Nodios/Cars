@@ -31,6 +31,9 @@ class VehicleModelListViewStore {
                 onEdit: this.onEdit,
                 onDelete: this.onDelete
             },
+            pager: {
+                rppOptions: [5, 10, 15]
+            },
             fetchFn: (filter) => {
                 const { searchString, page, rpp, orderBy, orderDirection } = filter;
                 const items = this.vehicleModelStore.find(searchString, page, rpp, orderBy, orderDirection);

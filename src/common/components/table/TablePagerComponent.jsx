@@ -55,12 +55,27 @@ class TablePagerComponent extends Component {
         return pages;
     }
 
+    buildRppSelector() {
+        const { onRppChange, rpp, rppOptions } = this.props;
+
+        return (
+            <div>
+                <select disabled={!onRppChange} value={rpp} onChange={e => onRppChange({event: e, rpp: e.target.value})}>
+                    {rppOptions.map(opt =>
+                        <option key={opt} value={opt}>{opt}</option>
+                    )}
+                </select>
+            </div>
+        )
+    }
+
     render() {
         return (
             <div>
                 <ul>
                     {this.buildPages()}
                 </ul>
+                {this.buildRppSelector()}
             </div>
         )
     }
@@ -70,14 +85,17 @@ TablePagerComponent.propTypes = {
     page: PropTypes.number,
     rpp: PropTypes.number,
     totalItems: PropTypes.number,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    rppOptions: PropTypes.array,
+    onRppChange: PropTypes.func
 };
 
 TablePagerComponent.defaultProps = {
     page: 1,
     rpp: 10,
     totalItems: 0,
-    onChange: () => { }
+    onChange: () => { },
+    rppOptions: [5, 10, 15, 20],
 };
 
 export default defaultTemplate(TablePagerComponent);
